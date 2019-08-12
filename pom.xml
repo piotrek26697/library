@@ -19,6 +19,13 @@
             <type>pom</type>
             <scope>provided</scope>
         </dependency>
+        
+        <dependency>
+    		<groupId>javax.json.bind</groupId>
+    		<artifactId>javax.json.bind-api</artifactId>
+    		<version>1.0</version>
+		</dependency>
+		
     </dependencies>
     <build>
         <finalName>library</finalName>
