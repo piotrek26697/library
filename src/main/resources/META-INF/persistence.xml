@@ -3,4 +3,4 @@
     <persistence-unit name="postgres-pu">
         <jta-data-source>java:/PostgresDS</jta-data-source>
     </persistence-unit>
-</persistence>ł
+</persistence>
