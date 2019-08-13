@@ -27,7 +27,7 @@ public class Book
 	@OneToMany(mappedBy = "book")
 	private List<BookHire> rentHistory;
 
-	@ManyToOne(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@ManyToOne(cascade = CascadeType.MERGE)
 	@JoinColumn(name = "author_id")
 	private Author author;
 
