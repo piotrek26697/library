@@ -7,24 +7,35 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import pl.fis.daos.qualifiers.CategoryImp;
 import pl.fis.data.Category;
 
+@CategoryImp
 @Stateless
-public class CategoryDAO
+public class CategoryDAO implements ObjectDAO<Category>
 {
 	@PersistenceContext
 	private EntityManager em;
 
-	public void addCategory(Category category)
+	@Override
+	public void addObject(Category category)
 	{
 		em.persist(category);
 	}
 
-	public List<Category> getCategories()
+	@Override
+	public List<Category> getObjects()
 	{
 		Query query = em.createQuery("select c from Category c");
 		@SuppressWarnings("unchecked")
 		List<Category> categoryList = query.getResultList();
 		return categoryList;
+	}
+
+	@Override
+	public Category getObject(long id)
+	{
+		// TODO Auto-generated method stub
+		return null;
 	}
 }
