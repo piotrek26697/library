@@ -2,13 +2,18 @@ package pl.fis.daos;
 
 import java.util.List;
 
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import pl.fis.data.entities.Author;
+import pl.fis.data.entities.Customer;
+
+@Stateless
 public class BasicDAO<T>
 {
-	@PersistenceContext
+	@PersistenceContext(name = "postgres-pu")
 	private EntityManager em;
 
 	public void addObject(T obj)
@@ -26,9 +31,14 @@ public class BasicDAO<T>
 
 	public T getObject(Class<T> clazz, long id)
 	{
-		return em.find(clazz, id);
+		T result = em.find(clazz, id);
+		if (result != null && result instanceof Customer)
+			((Customer) result).getHireHistory().size();
+		else if (result != null && result instanceof Author)
+			((Author) result).getBookList().size();
+		return result;
 	}
-	
+
 	public void updateObject(T obj)
 	{
 		em.merge(obj);
