@@ -1,28 +1,26 @@
-package pl.fis.data;
+package pl.fis.data.entities;
 
 import java.util.List;
 
-import javax.json.bind.annotation.JsonbTransient;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
-public class Author
+public class Category
 {
 	@Id
 	@GeneratedValue
-	@Column(name = "author_id")
+	@Column(name = "category_id")
 	private long id;
 
 	private String name;
 
-	private String lastName;
+	private String description;
 
-	@JsonbTransient
-	@OneToMany(mappedBy = "author")
+	@ManyToMany(mappedBy = "categories")
 	private List<Book> bookList;
 
 	public long getId()
@@ -45,14 +43,14 @@ public class Author
 		this.name = name;
 	}
 
-	public String getLastName()
+	public String getDescription()
 	{
-		return lastName;
+		return description;
 	}
 
-	public void setLastName(String lastName)
+	public void setDescription(String description)
 	{
-		this.lastName = lastName;
+		this.description = description;
 	}
 
 	public List<Book> getBookList()

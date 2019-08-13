@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.BookHire;
+import pl.fis.data.entities.BookHire;
 
 @Path("/book_hires")
 public class BookHireEndpoint

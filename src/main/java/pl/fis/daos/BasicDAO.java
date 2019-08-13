@@ -28,4 +28,9 @@ public class BasicDAO<T>
 	{
 		return em.find(clazz, id);
 	}
+	
+	public void updateObject(T obj)
+	{
+		em.merge(obj);
+	}
 }

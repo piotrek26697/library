@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.Category;
+import pl.fis.data.entities.Category;
 
 @Path("/categories")
 public class CategoryEndpoint

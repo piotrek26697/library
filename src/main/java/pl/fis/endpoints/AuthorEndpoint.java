@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.Author;
+import pl.fis.data.entities.Author;
 import pl.fis.errors.ResourceNotFoundException;
 
 @Path("/authors")

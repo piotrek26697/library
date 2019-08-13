@@ -1,4 +1,4 @@
-package pl.fis.data;
+package pl.fis.data.entities;
 
 import java.util.List;
 

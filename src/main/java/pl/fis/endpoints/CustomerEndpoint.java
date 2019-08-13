@@ -14,7 +14,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.Customer;
+import pl.fis.data.entities.Customer;
 import pl.fis.errors.ResourceNotFoundException;
 
 @Path("/customers")
