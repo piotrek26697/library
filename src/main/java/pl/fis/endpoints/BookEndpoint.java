@@ -27,7 +27,7 @@ public class BookEndpoint
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getBooks()
 	{
-		List<Book> bookList = bookManager.getObjects("Book");
+		List<Book> bookList = bookManager.getObjects(Book.class.getName());
 		return Response.ok(bookList).build();
 	}
 

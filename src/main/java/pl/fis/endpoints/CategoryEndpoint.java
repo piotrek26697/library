@@ -25,7 +25,7 @@ public class CategoryEndpoint
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCategories()
 	{
-		List<Category> categories = categoryManager.getObjects("Category");
+		List<Category> categories = categoryManager.getObjects(Category.class.getName());
 		return Response.ok(categories).build();
 	}
 

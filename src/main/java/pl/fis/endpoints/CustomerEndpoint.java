@@ -27,7 +27,7 @@ public class CustomerEndpoint
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getCustomers()
 	{
-		List<Customer> customerList = customerManager.getObjects("Customer");
+		List<Customer> customerList = customerManager.getObjects(Customer.class.getName());
 		return Response.ok(customerList).header("Access-Control-Allow-Origin", "*").build();
 	}
 

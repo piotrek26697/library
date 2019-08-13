@@ -27,7 +27,7 @@ public class AuthorEndpoint
 	@Produces(MediaType.APPLICATION_JSON)
 	public Response getAuthors()
 	{
-		List<Author> authors = authorManager.getObjects("Author");
+		List<Author> authors = authorManager.getObjects(Author.class.getName());
 		return Response.ok(authors).build();
 	}
 
