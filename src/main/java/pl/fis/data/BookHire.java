@@ -2,6 +2,7 @@ package pl.fis.data;
 
 import java.time.LocalDate;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -15,6 +16,7 @@ public class BookHire
 {
 	@Id
 	@GeneratedValue
+	@Column(name = "book_hire_id")
 	private long id;
 
 	@ManyToOne

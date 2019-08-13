@@ -14,39 +14,39 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.Book;
+import pl.fis.data.Author;
 import pl.fis.errors.ResourceNotFoundException;
 
-@Path("/books")
-public class BookEndpoint
+@Path("/authors")
+public class AuthorEndpoint
 {
 	@Inject
-	private BasicDAO<Book> bookManager;
+	private BasicDAO<Author> authorManager;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBooks()
+	public Response getAuthors()
 	{
-		List<Book> bookList = bookManager.getObjects("Book");
-		return Response.ok(bookList).build();
+		List<Author> authors = authorManager.getObjects("Author");
+		return Response.ok(authors).build();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addBook(Book book)
+	public Response addAuthor(Author author)
 	{
-		bookManager.addObject(book);
+		authorManager.addObject(author);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getBook(@PathParam("id") long id)
+	public Response getAuthor(@PathParam("id") long id)
 	{
-		Book book = bookManager.getObject(Book.class, id);
-		if (book == null)
-			throw new ResourceNotFoundException("book");
-		return Response.ok(book).build();
+		Author author = authorManager.getObject(Author.class, id);
+		if (author == null)
+			throw new ResourceNotFoundException("author");
+		return Response.ok(author).build();
 	}
 }

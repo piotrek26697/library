@@ -2,6 +2,8 @@ package pl.fis.data;
 
 import java.util.List;
 
+import javax.json.bind.annotation.JsonbTransient;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -12,12 +14,14 @@ public class Author
 {
 	@Id
 	@GeneratedValue
+	@Column(name = "author_id")
 	private long id;
 
 	private String name;
 
 	private String lastName;
 
+	@JsonbTransient
 	@OneToMany(mappedBy = "author")
 	private List<Book> bookList;
 

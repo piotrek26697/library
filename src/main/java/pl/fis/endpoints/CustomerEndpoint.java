@@ -14,39 +14,39 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
 import pl.fis.daos.BasicDAO;
-import pl.fis.data.Book;
+import pl.fis.data.Customer;
 import pl.fis.errors.ResourceNotFoundException;
 
-@Path("/books")
-public class BookEndpoint
+@Path("/customers")
+public class CustomerEndpoint
 {
 	@Inject
-	private BasicDAO<Book> bookManager;
+	private BasicDAO<Customer> customerManager;
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
-	public Response getBooks()
+	public Response getCustomers()
 	{
-		List<Book> bookList = bookManager.getObjects("Book");
-		return Response.ok(bookList).build();
+		List<Customer> customerList = customerManager.getObjects("Customer");
+		return Response.ok(customerList).header("Access-Control-Allow-Origin", "*").build();
 	}
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addBook(Book book)
+	public Response addCustomer(Customer customer)
 	{
-		bookManager.addObject(book);
+		customerManager.addObject(customer);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
 	@GET
 	@Produces(MediaType.APPLICATION_JSON)
 	@Path("/{id}")
-	public Response getBook(@PathParam("id") long id)
+	public Response getCustomer(@PathParam("id") long id)
 	{
-		Book book = bookManager.getObject(Book.class, id);
-		if (book == null)
-			throw new ResourceNotFoundException("book");
-		return Response.ok(book).build();
+		Customer customer = customerManager.getObject(Customer.class, id);
+		if (customer == null)
+			throw new ResourceNotFoundException("customer");
+		return Response.ok(customer).build();
 	}
 }
