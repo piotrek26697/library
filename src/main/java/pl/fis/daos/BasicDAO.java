@@ -8,6 +8,8 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import pl.fis.data.entities.Author;
+import pl.fis.data.entities.Book;
+import pl.fis.data.entities.Category;
 import pl.fis.data.entities.Customer;
 
 @Stateless
@@ -32,10 +34,29 @@ public class BasicDAO<T>
 	public T getObject(Class<T> clazz, long id)
 	{
 		T result = em.find(clazz, id);
-		if (result != null && result instanceof Customer)
-			((Customer) result).getHireHistory().size();
-		else if (result != null && result instanceof Author)
-			((Author) result).getBookList().size();
+		if (result == null)
+			return null;
+
+		if (result instanceof Customer)
+		{
+			if (((Customer) result).getHireHistory() != null)
+				((Customer) result).getHireHistory().size();
+		} else if (result instanceof Author)
+		{
+			if (((Author) result).getBookList() != null)
+				((Author) result).getBookList().size();
+		} else if (result instanceof Book)
+		{
+			((Book) result).getAuthor().getId();
+			((Book) result).getCategories().size();
+			if (((Book) result).getRentHistory() != null)
+			{
+				((Book) result).getRentHistory().size();
+			}
+		} else if (result instanceof Category)
+			if (((Category) result).getBookList() != null)
+				((Category) result).getBookList().size();
+
 		return result;
 	}
 
