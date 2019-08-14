@@ -1,30 +1,23 @@
 package pl.fis.data.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.ws.rs.core.Link;
-
 import pl.fis.data.entities.Author;
 
-public class AuthorResource
+public class AuthorResource extends Resource
 {
 	private long id;
 
 	private String name;
 
 	private String lastName;
-	
-	private List<Link> links;
 
 	public AuthorResource(Author author)
 	{
+		super();
 		id = author.getId();
 		name = author.getName();
 		lastName = author.getLastName();
-		links = new ArrayList<>();
 	}
-	
+
 	public long getId()
 	{
 		return id;
@@ -55,15 +48,4 @@ public class AuthorResource
 		this.lastName = lastName;
 	}
 
-	public List<Link> getLinks()
-	{
-		return links;
-	}
-
-	public void setLinks(List<Link> links)
-	{
-		this.links = links;
-	}
-	
-	
 }

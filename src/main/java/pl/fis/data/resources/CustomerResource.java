@@ -1,38 +1,21 @@
 package pl.fis.data.resources;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.ws.rs.core.Link;
-
 import pl.fis.data.entities.Customer;
 
-public class CustomerResource
+public class CustomerResource extends Resource
 {
 	private long id;
 	private String name;
 	private String lastName;
 	private String email;
 
-	private List<Link> linkList;
-
 	public CustomerResource(Customer customer)
 	{
+		super();
 		id = customer.getId();
 		name = customer.getName();
 		lastName = customer.getLastName();
 		email = customer.getEmail();
-		linkList = new ArrayList<>();
-	}
-
-	public List<Link> getLinkList()
-	{
-		return linkList;
-	}
-
-	public void setLinkList(List<Link> linkList)
-	{
-		this.linkList = linkList;
 	}
 
 	public long getId()
