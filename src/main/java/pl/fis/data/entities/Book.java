@@ -3,8 +3,6 @@ package pl.fis.data.entities;
 import java.time.LocalDate;
 import java.util.List;
 
-import javax.json.bind.annotation.JsonbTransient;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Book
@@ -23,15 +22,15 @@ public class Book
 	@Column(name = "book_id")
 	private long id;
 
-	@JsonbTransient
 	@OneToMany(mappedBy = "book")
 	private List<BookHire> rentHistory;
 
-	@ManyToOne(cascade = CascadeType.MERGE)
+	@NotNull
+	@ManyToOne
 	@JoinColumn(name = "author_id")
 	private Author author;
 
-	@JsonbTransient
+	@NotNull
 	@ManyToMany
 	@JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;

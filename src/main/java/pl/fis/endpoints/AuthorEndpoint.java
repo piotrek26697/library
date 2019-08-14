@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -42,7 +43,7 @@ public class AuthorEndpoint
 		for(Author author : authors)
 		{
 			AuthorResource authorResource = new AuthorResource(author);
-			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(getClass())
+			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(AuthorEndpoint.class)
 					.path(Long.toString(author.getId()));
 			Link authorLink = Link.fromUriBuilder(uriBuilder).rel("self").type("GET").build();
 			authorResource.getLinks().add(authorLink);
@@ -53,7 +54,7 @@ public class AuthorEndpoint
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addAuthor(Author author)
+	public Response addAuthor(@Valid Author author)
 	{
 		authorManager.addObject(author);
 		return Response.status(Status.NO_CONTENT).build();
@@ -74,7 +75,7 @@ public class AuthorEndpoint
 		{
 			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(BookEndpoint.class)
 					.path(Long.toString(book.getId()));
-			Link bookLink = Link.fromUriBuilder(uriBuilder).rel(book.getTitle()).type("GET").build();
+			Link bookLink = Link.fromUriBuilder(uriBuilder).rel("book").type("GET").build();
 			authorResource.getLinks().add(bookLink);
 		}
 		

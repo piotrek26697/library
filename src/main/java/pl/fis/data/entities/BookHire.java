@@ -9,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "book_hire")
@@ -19,17 +20,34 @@ public class BookHire
 	@Column(name = "book_hire_id")
 	private long id;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "book_id")
 	private Book book;
 
+	@NotNull
 	@ManyToOne
 	@JoinColumn(name = "customer_id")
 	private Customer customer;
 
+	@NotNull
+	@Column(nullable = false)
 	private LocalDate rentDate;
 
 	private LocalDate returnDate;
+
+	@Column(nullable = false)
+	private boolean emailSent;
+
+	public boolean isEmailSent()
+	{
+		return emailSent;
+	}
+
+	public void setEmailSent(boolean emailSent)
+	{
+		this.emailSent = emailSent;
+	}
 
 	public long getId()
 	{

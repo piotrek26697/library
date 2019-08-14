@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -44,10 +45,10 @@ public class CustomerEndpoint
 		{
 			CustomerResource customerResource = new CustomerResource(customer);
 
-			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(getClass())
+			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(CustomerEndpoint.class)
 					.path(Long.toString(customer.getId()));
 			Link customerLink = Link.fromUriBuilder(uriBuilder).rel("self").type("GET").build();
-			customerResource.getLinkList().add(customerLink);
+			customerResource.getLinks().add(customerLink);
 			resultList.add(customerResource);
 		}
 
@@ -56,7 +57,7 @@ public class CustomerEndpoint
 
 	@POST
 	@Consumes(MediaType.APPLICATION_JSON)
-	public Response addCustomer(Customer customer)
+	public Response addCustomer(@Valid Customer customer)
 	{
 		customerManager.addObject(customer);
 		return Response.status(Status.NO_CONTENT).build();
@@ -77,8 +78,8 @@ public class CustomerEndpoint
 		{
 			UriBuilder uriBuilder = UriBuilder.fromUri(uriInfo.getBaseUri()).path(BookHireEndpoint.class)
 					.path(Long.toString(bookHire.getId()));
-			Link bookHireLink = Link.fromUriBuilder(uriBuilder).rel(bookHire.getBook().getTitle()).type("GET").build();
-			customerResource.getLinkList().add(bookHireLink);
+			Link bookHireLink = Link.fromUriBuilder(uriBuilder).rel("bookRent").type("GET").build();
+			customerResource.getLinks().add(bookHireLink);
 		}
 
 		return Response.ok(customerResource).build();

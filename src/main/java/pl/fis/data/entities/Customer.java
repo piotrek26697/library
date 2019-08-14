@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class Customer
@@ -15,8 +16,15 @@ public class Customer
 	@Id
 	@GeneratedValue
 	private long id;
+	
+	@NotNull
+	@Column(nullable = false)
 	private String name;
+	@NotNull
+	@Column(nullable = false)
 	private String lastName;
+	@NotNull
+	@Column(nullable = false)
 	private String email;
 
 	@OneToMany(mappedBy = "customer")
