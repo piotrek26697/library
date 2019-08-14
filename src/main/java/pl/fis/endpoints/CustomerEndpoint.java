@@ -52,7 +52,7 @@ public class CustomerEndpoint
 			resultList.add(customerResource);
 		}
 
-		return Response.ok(resultList).header("Access-Control-Allow-Origin", "*").build();
+		return Response.ok(resultList).build();
 	}
 
 	@POST
