@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.NotEmpty;
 
 @Entity
 public class Category
@@ -17,7 +17,7 @@ public class Category
 	@Column(name = "category_id")
 	private long id;
 
-	@NotNull
+	@NotEmpty
 	@Column(nullable=false)
 	private String name;
 
