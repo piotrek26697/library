@@ -17,11 +17,11 @@ public class LinkListSerializer implements JsonbSerializer<List<Link>>
 	public void serialize(List<Link> obj, JsonGenerator generator, SerializationContext ctx)
 	{
 		JsonArrayBuilder linkListBuilder = Json.createArrayBuilder();
-		
-		for(Link link : obj)
+
+		for (Link link : obj)
 		{
 			JsonObject result = Json.createObjectBuilder()
-					.add("href", link.getUri().getPath())
+					.add("href", link.getUri().toString())
 					.add("rel", link.getRel())
 					.add("type", link.getType())
 					.build();
