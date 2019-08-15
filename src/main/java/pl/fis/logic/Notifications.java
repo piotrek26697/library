@@ -1,8 +1,8 @@
 package pl.fis.logic;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
@@ -37,17 +37,15 @@ public class Notifications
 		checkConfig();
 
 		List<BookHire> rentList = hireManager.getObjects(BookHire.class.getName());
-		List<String> notificationList = new ArrayList<>();
-		for (BookHire bookHire : rentList)
-		{
-			LocalDate expectedReturnDate = bookHire.getRentDate().plusDays(daysToRead);
-			if (bookHire.getReturnDate() == null && !bookHire.isEmailSent()
-					&& LocalDate.now().compareTo(expectedReturnDate) < 0)
-			{
-				notificationList.add(bookHire.getCustomer().getEmail());
-				bookHire.setEmailSent(true);
-				hireManager.updateObject(bookHire);
-			}
-		}
+
+		List<String> notificationList = rentList.stream()
+				.filter(a -> a.getReturnDate() == null)
+				.filter(a -> a.isEmailSent() == false)
+				.filter(a -> {
+					if (LocalDate.now().compareTo(a.getRentDate().plusDays(daysToRead)) > 0)
+						return true;
+					else
+						return false;
+				}).map(a -> a.getCustomer().getEmail()).collect(Collectors.toList()); //TODO test
 	}
 }
