@@ -28,7 +28,6 @@ import pl.fis.data.entities.Book;
 import pl.fis.data.entities.BookHire;
 import pl.fis.data.resources.BookHireResource;
 import pl.fis.data.resources.BookHireStatistic;
-import pl.fis.data.resources.BookResource;
 import pl.fis.errors.ResourceNotFoundException;
 import pl.fis.logic.StatisticManager;
 
@@ -113,11 +112,12 @@ public class BookHireEndpoint
 		for (Map.Entry<Book, Integer> entry : results.entrySet())
 		{
 			BookHireStatistic stat = new BookHireStatistic();
-			stat.setBook(new BookResource(entry.getKey()));
+			stat.setTitle(entry.getKey().getTitle());
+			stat.setPublishYear(entry.getKey().getPublishYear());
 			UriBuilder uriBuilderBook = UriBuilder.fromUri(uriInfo.getBaseUri()).path(BookEndpoint.class)
 					.path(Long.toString(entry.getKey().getId()));
-			Link bookLink = Link.fromUriBuilder(uriBuilderBook).rel("self").type("GET").build();
-			stat.getBook().getLinks().add(bookLink);
+			Link bookLink = Link.fromUriBuilder(uriBuilderBook).rel("book").type("GET").build();
+			stat.getLinks().add(bookLink);
 			stat.setNumberOfOccurences(entry.getValue());
 			listResults.add(stat);
 		}

@@ -1,24 +1,41 @@
 package pl.fis.data.resources;
 
-public class BookHireStatistic 
+import java.time.LocalDate;
+
+public class BookHireStatistic extends Resource
 {
-	private BookResource book;
+	private String title;
+	private LocalDate publishYear;
 	private int numberOfOccurences;
-	public BookResource getBook()
+
+	public String getTitle()
 	{
-		return book;
+		return title;
 	}
-	public void setBook(BookResource book)
+
+	public void setTitle(String title)
 	{
-		this.book = book;
+		this.title = title;
 	}
+
+	public LocalDate getPublishYear()
+	{
+		return publishYear;
+	}
+
+	public void setPublishYear(LocalDate publishYear)
+	{
+		this.publishYear = publishYear;
+	}
+
 	public int getNumberOfOccurences()
 	{
 		return numberOfOccurences;
 	}
+
 	public void setNumberOfOccurences(int numberOfOccurences)
 	{
 		this.numberOfOccurences = numberOfOccurences;
 	}
-	
+
 }
