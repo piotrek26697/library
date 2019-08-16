@@ -2,7 +2,6 @@ package pl.fis.logic;
 
 import java.time.LocalDate;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.ejb.Singleton;
 import javax.inject.Inject;
@@ -19,6 +18,9 @@ public class Notifications
 
 	@Inject
 	private BasicDAO<Config> configManager;
+
+	@Inject
+	Mail mail;
 
 	private int daysToRead;
 
@@ -38,14 +40,12 @@ public class Notifications
 
 		List<BookHire> rentList = hireManager.getObjects(BookHire.class.getName());
 
-		List<String> notificationList = rentList.stream()
-				.filter(a -> a.getReturnDate() == null)
-				.filter(a -> a.isEmailSent() == false)
-				.filter(a -> {
-					if (LocalDate.now().compareTo(a.getRentDate().plusDays(daysToRead)) > 0)
-						return true;
-					else
-						return false;
-				}).map(a -> a.getCustomer().getEmail()).collect(Collectors.toList()); //TODO test
+		rentList.stream().filter(a -> a.getReturnDate() == null).filter(a -> a.isEmailSent() == false).filter(a -> {
+			if (LocalDate.now().compareTo(a.getRentDate().plusDays(daysToRead)) > 0)
+				return true;
+			else
+				return false;
+		}).forEach(a -> mail.send(a.getCustomer().getEmail(), "Notice",
+				"You still haven't returned " + a.getBook().getTitle()));
 	}
 }
