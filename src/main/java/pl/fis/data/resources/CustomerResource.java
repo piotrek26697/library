@@ -8,6 +8,7 @@ public class CustomerResource extends Resource
 	private String name;
 	private String lastName;
 	private String email;
+	private boolean active;
 
 	public CustomerResource(Customer customer)
 	{
@@ -16,6 +17,17 @@ public class CustomerResource extends Resource
 		name = customer.getName();
 		lastName = customer.getLastName();
 		email = customer.getEmail();
+		active = customer.isActive();
+	}
+
+	public boolean isActive()
+	{
+		return active;
+	}
+
+	public void setActive(boolean active)
+	{
+		this.active = active;
 	}
 
 	public long getId()

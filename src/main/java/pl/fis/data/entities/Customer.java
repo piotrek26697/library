@@ -33,6 +33,19 @@ public class Customer
 	@OneToMany(mappedBy = "customer")
 	private List<BookHire> hireHistory;
 
+	@Column(nullable = false)
+	private boolean active;
+
+	public boolean isActive()
+	{
+		return active;
+	}
+
+	public void setActive(boolean active)
+	{
+		this.active = active;
+	}
+
 	public long getId()
 	{
 		return id;

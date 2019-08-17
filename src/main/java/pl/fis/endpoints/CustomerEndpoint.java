@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -59,6 +60,7 @@ public class CustomerEndpoint
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addCustomer(@Valid Customer customer)
 	{
+		customer.setActive(true);
 		customerManager.addObject(customer);
 		return Response.status(Status.NO_CONTENT).build();
 	}
@@ -83,5 +85,13 @@ public class CustomerEndpoint
 		}
 
 		return Response.ok(customerResource).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateCustomer(@Valid Customer customer)
+	{
+		customerManager.updateObject(customer);
+		return Response.status(Status.NO_CONTENT).build();
 	}
 }
