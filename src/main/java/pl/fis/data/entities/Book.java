@@ -12,6 +12,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -35,9 +36,24 @@ public class Book
 	@JoinTable(name = "book_category", joinColumns = @JoinColumn(name = "book_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
 	private List<Category> categories;
 
+	@NotEmpty
+	@Column(nullable = false)
 	private String title;
 
 	private LocalDate publishYear;
+	
+	@Column(nullable = false)
+	private boolean available; // not the same as 'currently not borrowed'!
+
+	public boolean isAvailable()
+	{
+		return available;
+	}
+
+	public void setAvailable(boolean available)
+	{
+		this.available = available;
+	}
 
 	public String getTitle()
 	{

@@ -12,12 +12,25 @@ public class BookResource extends Resource
 
 	private LocalDate publishYear;
 
+	private boolean available;
+
 	public BookResource(Book book)
 	{
 		super();
 		id = book.getId();
 		title = book.getTitle();
 		publishYear = book.getPublishYear();
+		available = book.isAvailable();
+	}
+
+	public boolean isAvailable()
+	{
+		return available;
+	}
+
+	public void setAvailable(boolean available)
+	{
+		this.available = available;
 	}
 
 	public long getId()

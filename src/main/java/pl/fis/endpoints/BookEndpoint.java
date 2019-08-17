@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -58,7 +59,16 @@ public class BookEndpoint
 	@Consumes(MediaType.APPLICATION_JSON)
 	public Response addBook(@Valid Book book)
 	{
+		book.setAvailable(true);
 		bookManager.addObject(book);
+		return Response.status(Status.NO_CONTENT).build();
+	}
+	
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateBook(@Valid Book book)
+	{
+		bookManager.updateObject(book);
 		return Response.status(Status.NO_CONTENT).build();
 	}
 
